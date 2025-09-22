@@ -1,0 +1,32 @@
+POKEPRIMATA:
+
+O PokePrimata é uma Pokédex digital desenvolvida como parte da disciplina de Projeto Multidisciplinar
+O projeto tem como foco aplicar conceitos de protótipos de alta fidelidade (Figma) e estruturação de dados em JavaScript/JSON
+
+Nome dos Integrantes do grupo
+
+Felipe Piquetti
+Mourvan Henrique Maes
+Bruno Venicius
+Alan 
+
+As telas foram desenvolvidas no Figma, aplicando conceitos de identidade visual (cores, fontes, espaçamento) 
+e fluxo de navegação entre as principais funcionalidades.
+ 
+https://www.figma.com/design/90yaA59D06WbO9osmkAPnP/Sem-t%C3%ADtulo?node-id=85-271&t=hmglTxTzXCjGxFvo-1
+
+Jornada do Usuário
+
+O fluxo principal definido para o usuário é:
+
+Tela Inicial (Home) → acesso às funções principais da Pokédex.
+Tela de Pokémon (Detalhes) → ao clicar em um Pokémon, exibe informações como nome, habilidade, peso, altura, imagem e evolução.
+Tela de Favoritos → onde ficam armazenados os Pokémon marcados como favoritos.
+Tela de Quiz/Jogos → interação para testar o conhecimento sobre os Pokémon.
+
+Estrutura de Dados
+
+A estrutura de dados foi implementada em JavaScript (JSON-like), representando os Pokémon e suas informações principais.
+
+📂 Estrutura de Dados  
+A estrutura da Pokédex está implementada em **JavaScript** no arquivo [`src/data.js`](./src/data.js).
