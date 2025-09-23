@@ -11,7 +11,7 @@ const pokedex = [
   {
     id: 2,
     nome: "Ivysaur",
-    habilidade: "Overgrow",
+    habilidade: "Overgrow", 
     peso: 13.0,
     altura: 1.0,
     imagem: "./images/ivysaur.png",
