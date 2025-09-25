@@ -1,0 +1,88 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+20&display=swap'); /*font-family: "Jersey 20", sans-serif;  */
+
+*{
+    margin: 0;
+}
+:root{
+    --branco: white;
+    --preto: black;
+    --teste: #1F163D;
+    --azul-botao: #14CDFF;
+    --laranja_contraste: #d49b7f;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem;
+    background-color: var(--teste);
+}
+.m_header_home a{
+    display: flex;
+    align-items: center;
+    color: var(--branco);
+    text-decoration: none;
+    gap: 0.2rem;
+    font-size: 70%;
+    font-family: "Jersey 20", sans-serif;
+}
+.m_header_home a img{
+    width: 2rem;
+}
+.m_header_nav{
+    display: flex;
+    gap: 1rem;
+}
+.m_header_a{
+    color: var(--branco);
+    font-family: "Jersey 20", sans-serif;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 3px;
+}
+.m_header_a:hover{
+    color: var(--laranja_contraste);
+    text-shadow:
+        0 0 6px var(--laranja_contraste),
+        0 0 20px var(--laranja_contraste),
+        0 0 40px var(--laranja_contraste);
+}
+.m_header_marcado{
+    color: var(--azul-botao);
+    text-shadow:
+        0 0 6px var(--azul-botao),
+        0 0 20px var(--azul-botao),
+        0 0 40px var(--azul-botao);
+}
+.m_header_marcado:hover{
+    color: var(--azul-botao);
+}
+.m_header_direito{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.m_header_direito a{
+    display: flex;
+    align-items: center;
+}
+.m_header_botao_login{
+    color: var(--preto);
+    background-color: var(--azul-botao);
+    text-decoration: none;
+    font-family: "Jersey 20", sans-serif;
+    font-size: 80%;
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 3px var(--azul-botao), 0 0 5px var(--azul-botao);
+}
+.m_header_botao_login:hover{
+    background-color: var(--laranja_contraste);
+    box-shadow: 1px 1px 3px var(--laranja_contraste), 0 0 5px var(--laranja_contraste);
+}
+.m_header_lupa{
+    width: 1rem;
+}
+.m_header_menu{
+    width: 1.5rem;
+}
