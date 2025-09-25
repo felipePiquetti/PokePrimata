@@ -1,33 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokeprimata</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokeprimata</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body class="f_body"> 
-    <header>
-        <div class="f_header_home">
-            <a href="index.html">
-                <img src="img/logo_pokebola.svg" alt="logo">
-                <h1>POKEPRIMATA</h1>
-            </a>
-        </div>
-        <nav class="f_header_nav">
-            <a href="index.html" class="f_header_a f_header_marcado">Inicio</a>
-            <a href="#" class="f_header_a">Times</a>
-            <a href="#" class="f_header_a">Pokémon</a>
-            <a href="#" class="f_header_a">Favoritos</a>
-            <a href="#" class="f_header_a">Jogos</a>
-        </nav>
-        <div class="f_header_direito">
-            <a href="#"><img src="img/lupa.svg" alt="lupa" class="f_header_lupa"></a>
-            <a href="#" class="f_header_botao_login">LOGIN</a>
-            <a href="#"><img src="img/menu.svg" alt="menu" class="f_header_menu"></a>
-        </div>
-    </header>
-    <main class="f_main">
-   </main>
+<body class="f_body">
+  <header>
+    <div class="f_header_home">
+      <a href="index.html">
+        <img src="img/logo_pokebola.svg" alt="logo">
+        <h1>POKEPRIMATA</h1>
+      </a>
+    </div>
+    <nav class="f_header_nav">
+      <a href="index.html" class="f_header_a f_header_marcado">Inicio</a>
+      <a href="#" class="f_header_a">Times</a>
+      <a href="#" class="f_header_a">Pokémon</a>
+      <a href="#" class="f_header_a">Favoritos</a>
+      <a href="#" class="f_header_a">Jogos</a>
+    </nav>
+    <div class="f_header_direito">
+      <a href="#"><img src="img/lupa.svg" alt="lupa" class="f_header_lupa"></a>
+      <a href="#" class="f_header_botao_login">LOGIN</a>
+      <a href="#"><img src="img/menu.svg" alt="menu" class="f_header_menu"></a>
+    </div>
+  </header>
+
+  <main class="f_main">
+    <!-- SUAS LOGOS ABAIXO DO CABEÇALHO (opcional) -->
+    <section class="hero-logos" aria-label="Identidade visual PokePrimata">
+      <div class="hero-logos__wrap">
+        <!-- Ajuste o caminho dos PNGs abaixo -->
+        <img class="hero-logos__monkey" src="img/logo-macaco.png" alt="Mascote PokePrimata" />
+        <img class="hero-logos__wordmark" src="img/logo.png" alt="PokePrimata" />
+      </div>
+    </section>
+
+    <!-- CONTROLES / FILTROS -->
+    <section class="p_controls">
+      <label class="p_select">
+        <select id="typeSelect" aria-label="Filtrar por tipo">
+          <option value="all">--Selecione--</option>
+          <!-- Tipos preenchidos via JS -->
+        </select>
+      </label>
+      <button id="applyFilter" class="p_btn">Filtrar</button>
+    </section>
+
+    <!-- GRID DE CARDS -->
+    <section id="grid" class="p_grid" aria-live="polite"></section>
+
+    <!-- PAGINAÇÃO -->
+    <nav class="p_pagination" aria-label="Paginação de Pokémon">
+      <button id="prevPage" class="p_pageBtn" aria-label="Página anterior">◀</button>
+      <span id="pageLabel" class="p_pageLabel">1 de 1</span>
+      <button id="nextPage" class="p_pageBtn" aria-label="Próxima página">▶</button>
+    </nav>
+  </main>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
