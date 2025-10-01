@@ -532,21 +532,122 @@ header{
 .pc-nav:hover { background: rgba(30,41,59,.8); }
 .pc-nav:active { transform: scale(.96); }
 
-.pc-prev { left: 8px; }
-.pc-next { right: 8px; }
-
-/* Responsivo básico */
-@media (max-width: 640px) {
-  .pc-carousel { padding: 20px 48px; }
-  .pc-card { width: 240px; height: 380px; }
+ .pc-prev { left: -80px; }
+.pc-next { right: -80px; }
+/* ===== HERO (igual ao visual do print) ===== */
+.hero {
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 4vw, 36px) 16px 10px;
 }
-/* Define um offset global para os botões do carrossel */
-.pc-carousel { --nav-edge-offset: -70px; }
 
-.pc-prev { left: var(--nav-edge-offset); }
-.pc-next { right: var(--nav-edge-offset); }
+.hero__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
 
-/* Opcional: no mobile, um pouco menos agressivo */
+/* Ícone (macaco) e wordmark com leve glow */
+.hero__icon {
+  width: clamp(88px, 12vw, 140px);
+  height: auto;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.45));
+}
+
+.hero__wordmark {
+  width: clamp(320px, 52vw, 680px);
+  height: auto;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.45));
+}
+
+/* Subtítulo central */
+.hero__subtitle {
+  margin-top: 4px;
+  color: #d6e6ff;
+  opacity: .9;
+  line-height: 1.4;
+  font-size: clamp(14px, 2.1vw, 18px);
+  max-width: 900px;
+}
+
+/* Barra de busca estilo “glass” */
+.hero__search {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(960px, 92vw);
+  padding: 10px 10px 10px 14px;
+  border-radius: 16px;
+  background: rgba(7, 12, 22, .72);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 34px rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+}
+
+.hero__searchIcon {
+  width: 18px;
+  height: 18px;
+  opacity: .9;
+}
+
+.hero__search input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #eaf2ff;
+  font-size: 15px;
+}
+
+.hero__search input::placeholder {
+  color: #a8bed9;
+  opacity: .9;
+}
+
+/* Botão “Buscar” */
+.hero__search button {
+  background: var(--azul-botao);
+  border: 0;
+  color: #062130;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(20,205,255,.25);
+}
+
+.hero__search button:hover {
+  background: var(--azul_contraste);
+}
+
+/* Responsivo */
 @media (max-width: 640px) {
-  .pc-carousel { --nav-edge-offset: -8px; }
+  .hero__wordmark { width: clamp(240px, 64vw, 460px); }
+  .hero__subtitle { font-size: 14px; }
+  .hero__search { gap: 8px; padding: 8px 8px 8px 12px; border-radius: 14px; }
+  .hero__search button { padding: 8px 14px; border-radius: 10px; }
+}
+/* ==== Overrides p/ deixar o ícone grande como no print ==== */
+.hero__wrap { gap: 6px; } /* aproxima tudo um pouco */
+
+.hero__icon {
+  /* bem maior no desktop, com limite superior generoso */
+  width: clamp(180px, 22vw, 260px);
+  height: auto;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.45));
+}
+
+/* aumenta um pouco a wordmark para manter proporção do print */
+.hero__wordmark {
+  width: clamp(460px, 60vw, 780px);
+  height: auto;
+}
+
+/* no mobile, mantemos uma escala confortável */
+@media (max-width: 640px) {
+  .hero__icon { width: clamp(130px, 28vw, 190px); }
+  .hero__wordmark { width: clamp(280px, 70vw, 520px); }
 }

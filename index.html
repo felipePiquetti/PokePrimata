@@ -30,12 +30,26 @@
 
   <main class="f_main">
     <!-- SUAS LOGOS ABAIXO DO CABEÇALHO (opcional) -->
-    <section class="hero-logos" aria-label="Identidade visual PokePrimata">
-      <div class="hero-logos__wrap">
-        <img class="hero-logos__monkey" src="img/logo-macaco.png" alt="Mascote PokePrimata" />
-        <img class="hero-logos__wordmark" src="img/logo.png" alt="PokePrimata" />
-      </div>
-    </section>
+  <!-- HERO (logo + título + descrição + busca) -->
+<section class="hero" aria-label="Apresentação PokePrimata">
+  <div class="hero__wrap">
+    <img class="hero__icon" src="img/logo.png" alt="Mascote PokePrimata">
+  <img class="hero__wordmark" src="img/pokeprimata.svg" alt="PokePrimata">
+
+    <p class="hero__subtitle">
+      Explore o universo Pokémon com nossa interface futurista.
+      <br>
+      Descubra, pesquise e conheça todos os Pokémon.
+    </p>
+
+    <form class="hero__search" role="search" onsubmit="return false;">
+      <img class="hero__searchIcon" src="img/lupa.svg" alt="" aria-hidden="true">
+      <input id="searchInput" type="search" placeholder="Buscar Pokémon por nome, número..." aria-label="Buscar Pokémon por nome ou número">
+      <button id="searchButton" type="button">Buscar</button>
+    </form>
+  </div>
+</section>
+
 
     <!-- ===================== CARROSSEL DESTQUE (NOVO) ===================== -->
     <section class="pc-carousel" aria-label="Carrossel Pokémon">
