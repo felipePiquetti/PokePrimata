@@ -386,7 +386,7 @@ header{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   margin: 6px auto 40px;
 }
 
@@ -539,4 +539,14 @@ header{
 @media (max-width: 640px) {
   .pc-carousel { padding: 20px 48px; }
   .pc-card { width: 240px; height: 380px; }
+}
+/* Define um offset global para os botões do carrossel */
+.pc-carousel { --nav-edge-offset: -70px; }
+
+.pc-prev { left: var(--nav-edge-offset); }
+.pc-next { right: var(--nav-edge-offset); }
+
+/* Opcional: no mobile, um pouco menos agressivo */
+@media (max-width: 640px) {
+  .pc-carousel { --nav-edge-offset: -8px; }
 }
