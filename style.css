@@ -471,3 +471,26 @@ header {
 }
 
 .hero__search button:hover { background: var(--azul_contraste); }
+ /* o wrap vira referência para posicionar a palavra por cima */
+.hero__wrap{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ícone fica no fluxo normal (atrás) */
+.hero__icon{ display:block; }
+
+/* wordmark por cima, centralizado; ajuste o "grude" em --overlap */
+.hero__wordmark{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);     /* centraliza na horizontal */
+  bottom: var(--overlap, 222px);    /* NEGATIVO = invade mais o macaco */
+  z-index: 2;                       /* fica na frente */
+}
+.hero__wrap{ --overlap: -26px; }
+.hero__wordmark{ margin-left: 4px; }   /* direita */
+/* ou */ 
+.hero__wordmark{ margin-left: -4px; }  /* esquerda */

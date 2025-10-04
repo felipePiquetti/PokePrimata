@@ -1,0 +1,22 @@
+body{
+    background-color: black;
+}
+
+/* Macaco */
+.f_logo img{
+  width: 196px;
+  height: auto;
+  display: block;      /* evita “buraquinho” embaixo */
+  margin: 0 auto;      /* centraliza */
+}
+
+/* Letreiro Pokeprimata */
+.f_letreiro img{
+  width: 456px;        /* <- era 456x */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.f_letreiro{
+    margin-top: -120px;
+}
