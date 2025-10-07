@@ -570,3 +570,37 @@ header {
   right: -32px;  /* antes -64px */
 }
 
+.pc-dots{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top:30px;
+}
+
+.pc-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.25);
+  background: rgba(255,255,255,.18);
+  opacity: .9;
+  transition: width .22s ease, height .22s ease, background .2s ease, opacity .2s ease;
+}
+
+.pc-dot.is-active{
+  width: 26px;
+  height: 10px;
+  background: var(--azul-botao);
+  opacity: 1;
+}
+
+/* Cursor de mão nos pontos do carrossel */
+.pc-dot { cursor: pointer; }
+
+/* (opcional) feedback visual */
+.pc-dot:hover { opacity: 1; }
+.pc-dot:focus-visible {
+  outline: 2px solid rgba(20,205,255,.7);
+  outline-offset: 2px;
+}

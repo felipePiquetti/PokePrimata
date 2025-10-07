@@ -267,6 +267,10 @@ function pcLoadCarousel(type = 'all'){
     let index = Math.floor(len/2); // começa no do meio
     let dragDX = 0;
 
+    const dotsWrap = document.getElementById("pcDots");
+ 
+
+
     function mod(n, m){ return ((n % m) + m) % m; }
     function relative(i) {
       let d = i - index;
@@ -274,6 +278,29 @@ function pcLoadCarousel(type = 'all'){
       if (d < -len/2) d += len;
       return d;
     }
+
+    function renderDots(){
+      if(!dotsWrap) return;
+      dotsWrap.innerHTML = "";
+      for (let i =0; i< len; i++){
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "pc-dot" + (i === index ? " is-active" : "");
+        dot.setAttribute("aria-label", `Ir para card ${i+1}`);
+        dot.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(dot);
+      }
+    } 
+
+    function updateDots(){
+      if (!dotsWrap) return;
+      [...dotsWrap.children].forEach((el, i) => {
+        el.classList.toggle("is-active", i === index);
+      });
+    }
+
+    renderDots();
+
     function applyTransforms() {
   const spread = 230;        // espaçamento base (ajuste fino aqui)
   const edgeFactor = 0.85;   // quanto comprimir as pontas (0.8–0.9)
@@ -300,8 +327,8 @@ function pcLoadCarousel(type = 'all'){
   });
 }
 
-    function go(dir){ index = mod(index + dir, len); applyTransforms(); }
-    function goTo(i){ index = mod(i, len); applyTransforms(); }
+    function go(dir){ index = mod(index + dir, len); applyTransforms(); updateDots(); }
+    function goTo(i){ index = mod(i, len); applyTransforms(); updateDots(); }
 
     // Botões
     document.querySelector(".pc-prev")?.addEventListener("click", () => go(-1), { once: true });
@@ -331,6 +358,7 @@ function pcLoadCarousel(type = 'all'){
       if (dragDX > threshold) go(-1);
       else if (dragDX < -threshold) go(1);
       dragDX = 0; applyTransforms();
+      updateDots();
     };
 
     // Remove handlers anteriores (para evitar duplicar ao recarregar)
