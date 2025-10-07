@@ -1,3 +1,5 @@
+// ===== app.js (com favoritos ❤️ e indicadores do carrossel) =====
+
 // ===== Config =====
 const API = 'https://pokeapi.co/api/v2';
 const PAGE_SIZE = 24;        // quantidade por página
@@ -28,6 +30,20 @@ function getCache(k){
 function setCache(k, v){
   memCache.set(k, v);
   try { localStorage.setItem(getCacheKey(k), JSON.stringify(v)); } catch {}
+}
+
+// ===== Favoritos =====
+const FAV_KEY = 'pkm:favs';
+function loadFavs(){
+  try { return new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+function saveFavs(set){ try { localStorage.setItem(FAV_KEY, JSON.stringify([...set])); } catch {} }
+let favs = loadFavs();
+const isFav = (id) => favs.has(id);
+function toggleFav(id){
+  if (favs.has(id)) favs.delete(id); else favs.add(id);
+  saveFavs(favs);
 }
 
 // ===== Util =====
@@ -92,6 +108,17 @@ function renderCards(list){
     const card = document.createElement('article');
     card.className = 'p_card';
     card.innerHTML = `
+      <!-- ❤️ favorito -->
+      <button class="p_fav ${isFav(p.id) ? 'is-fav' : ''}"
+              data-id="${p.id}"
+              aria-label="${isFav(p.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}"
+              aria-pressed="${isFav(p.id)}"
+              title="${isFav(p.id) ? 'Remover dos favoritos' : 'Favoritar'}">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41.99 4.22 2.44C11.37 4.99 13.04 4 14.78 4 17.3 4 19.3 6 19.3 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </button>
+
       <div class="p_id">#${pad(p.id)}</div>
       <div class="p_imgWrap">
         <img src="${p.img}" alt="${p.name}">
@@ -173,6 +200,20 @@ applyFilterBtn.addEventListener('click', () => {
   fetchPage();
   // também atualiza o carrossel de destaque baseado no filtro atual
   pcLoadCarousel(currentType);
+});
+
+// Toggle de favorito (delegação no grid)
+grid.addEventListener('click', (e) => {
+  const btn = e.target.closest('.p_fav');
+  if (!btn) return;
+
+  const id = Number(btn.dataset.id);
+  toggleFav(id);
+
+  const active = btn.classList.toggle('is-fav');
+  btn.setAttribute('aria-pressed', String(active));
+  btn.setAttribute('aria-label', active ? 'Remover dos favoritos' : 'Adicionar aos favoritos');
+  btn.title = active ? 'Remover dos favoritos' : 'Favoritar';
 });
 
 // ===== Start (grid) =====
@@ -267,9 +308,8 @@ function pcLoadCarousel(type = 'all'){
     let index = Math.floor(len/2); // começa no do meio
     let dragDX = 0;
 
+    // Indicadores (dots)
     const dotsWrap = document.getElementById("pcDots");
- 
-
 
     function mod(n, m){ return ((n % m) + m) % m; }
     function relative(i) {
@@ -282,7 +322,7 @@ function pcLoadCarousel(type = 'all'){
     function renderDots(){
       if(!dotsWrap) return;
       dotsWrap.innerHTML = "";
-      for (let i =0; i< len; i++){
+      for (let i = 0; i < len; i++){
         const dot = document.createElement("button");
         dot.type = "button";
         dot.className = "pc-dot" + (i === index ? " is-active" : "");
@@ -290,7 +330,7 @@ function pcLoadCarousel(type = 'all'){
         dot.addEventListener("click", () => goTo(i));
         dotsWrap.appendChild(dot);
       }
-    } 
+    }
 
     function updateDots(){
       if (!dotsWrap) return;
@@ -302,30 +342,29 @@ function pcLoadCarousel(type = 'all'){
     renderDots();
 
     function applyTransforms() {
-  const spread = 230;        // espaçamento base (ajuste fino aqui)
-  const edgeFactor = 0.85;   // quanto comprimir as pontas (0.8–0.9)
+      const spread = 230;        // espaçamento base
+      const edgeFactor = 0.85;   // comprime as pontas (0.8–0.9)
 
-  const maxD = Math.floor(cards.length / 2);
+      const maxD = Math.floor(cards.length / 2);
 
-  cards.forEach((card, i) => {
-    const d = relative(i);
-    const isCenter = d === 0;
+      cards.forEach((card, i) => {
+        const d = relative(i);
+        const isCenter = d === 0;
 
-    // comprime só os extremos (ex.: d = -2 e d = 2 quando há 5 cards)
-    const factor = (Math.abs(d) === maxD) ? edgeFactor : 1;
+        const factor = (Math.abs(d) === maxD) ? edgeFactor : 1;
 
-    const x = d * spread * factor + dragDX;
-    const scale = 1 - Math.min(Math.abs(d) * 0.12, 0.30);
-    const opacity = 1 - Math.min(Math.abs(d) * 0.25, 0.50);
-    const z = 100 - Math.abs(d);
+        const x = d * spread * factor + dragDX;
+        const scale = 1 - Math.min(Math.abs(d) * 0.12, 0.30);
+        const opacity = 1 - Math.min(Math.abs(d) * 0.25, 0.50);
+        const z = 100 - Math.abs(d);
 
-    card.style.transform = `translate(-50%, -50%) translateX(${x}px) scale(${scale})`;
-    card.style.opacity = opacity;
-    card.style.zIndex = z;
-    card.classList.toggle("is-center", isCenter);
-    card.style.filter = "none";
-  });
-}
+        card.style.transform = `translate(-50%, -50%) translateX(${x}px) scale(${scale})`;
+        card.style.opacity = opacity;
+        card.style.zIndex = z;
+        card.classList.toggle("is-center", isCenter);
+        card.style.filter = "none";
+      });
+    }
 
     function go(dir){ index = mod(index + dir, len); applyTransforms(); updateDots(); }
     function goTo(i){ index = mod(i, len); applyTransforms(); updateDots(); }
@@ -381,5 +420,6 @@ function pcLoadCarousel(type = 'all'){
 
     // Inicializa posicionamento
     applyTransforms();
+    updateDots();
   })();
 }

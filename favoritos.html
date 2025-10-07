@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Favoritos — PokePrimata</title>
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- CSS específico desta página (mantém fundo sólido e o layout dos cards) -->
+  <style>
+    /* Sem imagem de fundo nesta página */
+    .f_nobg::before { display: none !important; }
+
+    /* Mini-hero */
+    .fav-hero { display:grid; place-items:center; padding: 28px 16px 8px; }
+    .fav-title { color:#eaf2ff; font-family:"Jersey 20",sans-serif; font-size:clamp(28px,4vw,40px); letter-spacing:.02em; }
+    .fav-sub   { color:#c7d7f0; opacity:.9; margin-top:6px; text-align:center; }
+
+    /* Controles */
+    .fav-controls{ display:flex; gap:8px; justify-content:center; align-items:center; margin:12px auto 18px; width:min(1100px,92vw); }
+    .fav-clear{ background:#ef4444; border:0; color:#fff; padding:8px 12px; border-radius:10px; cursor:pointer; }
+    .fav-clear:hover{ filter:brightness(1.05); }
+
+    /* Lista */
+    .fav-list{ width:min(1100px,92vw); margin:6px auto 48px; display:flex; flex-direction:column; gap:14px; }
+
+    .fav-card{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1fr 240px;
+      gap:14px;
+      padding:14px;
+      background:#0c111b;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+      color:#eaf2ff;
+    }
+    .fav-info .fav-id{ font-size:12px; color:#a9b9d8; opacity:.9; font-weight:700; letter-spacing:.05em; }
+    .fav-name{ font-family:"Jersey 20",sans-serif; font-size:28px; margin:6px 0 8px; letter-spacing:.02em; text-transform:uppercase; }
+    .fav-types{ display:flex; gap:6px; flex-wrap:wrap; }
+
+    .fav-media{
+      display:grid; place-items:center;
+      background:#12192a; border-radius:14px;
+      border:1px solid rgba(255,255,255,.06);
+      overflow:hidden;
+    }
+    .fav-media img{ width: 180px; height:auto; filter: drop-shadow(0 12px 24px rgba(0,0,0,.5)); }
+
+    /* remover individual (lixeira) */
+    .fav-remove{
+      position:absolute; right:10px; top:10px;
+      background:#ef4444; border:0; color:#fff;
+      width:30px; height:30px; border-radius:10px;
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .fav-remove:hover{ filter:brightness(1.05); }
+
+    /* Reaproveita coração pequeno dos cards */
+    .p_fav{
+      position:absolute; left:10px; top:10px;
+      width:26px; height:26px; display:grid; place-items:center;
+      border-radius:999px; border:1px solid rgba(255,255,255,.14);
+      background:rgba(14,19,32,.70); cursor:pointer; z-index:3;
+    }
+    .p_fav svg{ width:14px; height:14px; fill:#9fb0c6; }
+    .p_fav.is-fav{ background:rgba(20,205,255,.14); border-color:rgba(20,205,255,.45); }
+    .p_fav.is-fav svg{ fill:var(--azul-botao); filter:drop-shadow(0 0 6px rgba(20,205,255,.55)); }
+
+    /* Empty state */
+    .fav-empty{ width:min(900px,92vw); margin:24px auto; color:#b9c7de; text-align:center; }
+
+    @media (max-width: 720px){
+      .fav-card{ grid-template-columns:1fr; }
+      .fav-media{ padding:12px; }
+      .fav-media img{ width:160px; }
+    }
+  </style>
+</head>
+
+<body class="f_body f_nobg">
+  <header>
+    <div class="f_header_home">
+      <a href="index.html">
+        <img src="img/logo_pokebola.svg" alt="logo">
+        <h1>POKEPRIMATA</h1>
+      </a>
+    </div>
+    <nav class="f_header_nav">
+      <a href="index.html" class="f_header_a">Inicio</a>
+      <a href="#" class="f_header_a">Times</a>
+      <a href="pokemon.html" class="f_header_a">Pokémon</a>
+      <a href="favoritos.html" class="f_header_a f_header_marcado">Favoritos</a>
+      <a href="#" class="f_header_a">Jogos</a>
+    </nav>
+    <div class="f_header_direito">
+      <a href="#"><img src="img/lupa.svg" alt="lupa" class="f_header_lupa"></a>
+      <a href="#" class="f_header_botao_login">LOGIN</a>
+      <a href="#"><img src="img/menu.svg" alt="menu" class="f_header_menu"></a>
+    </div>
+  </header>
+
+  <main class="f_main">
+    <section class="fav-hero">
+      <h1 class="fav-title">FAVORITOS</h1>
+      <p class="fav-sub">Seus companheiros preferidos ficam guardados aqui.</p>
+    </section>
+
+    <div class="fav-controls">
+      <button id="favClear" class="fav-clear" title="Limpar todos">Limpar todos</button>
+    </div>
+
+    <section id="favList" class="fav-list" aria-live="polite"></section>
+  </main>
+
+  <script src="favorites.js" defer></script>
+</body>
+</html>

@@ -18,7 +18,7 @@
       <a href="index.html" class="f_header_a f_header_marcado">Inicio</a>
       <a href="#" class="f_header_a">Times</a>
       <a href="pokemon.html" class="f_header_a">Pokémon</a>
-      <a href="#" class="f_header_a">Favoritos</a>
+      <a href="favoritos.html" class="f_header_a">Favoritos</a>
       <a href="#" class="f_header_a">Jogos</a>
     </nav>
     <div class="f_header_direito">
@@ -61,6 +61,7 @@
             <div class="pc-dots" id="pcDots" aria-label="Indicadores do carrossel"></div>
 
     </section>
+    
     <!-- =================== /CARROSSEL DESTQUE (NOVO) ===================== -->
 
     <!-- BLOCO DOS POKÉMON (empurrado para baixo via CSS) -->
@@ -69,10 +70,14 @@
       <section class="p_controls">
         <label class="p_select">
           <select id="typeSelect" aria-label="Filtrar por tipo">
+
             <option value="all">--Selecione--</option>
             <!-- Tipos preenchidos via JS -->
+             
           </select>
+          
         </label>
+        
         <button id="applyFilter" class="p_btn">Filtrar</button>
       </section>
 
@@ -86,7 +91,11 @@
         <button id="nextPage" class="p_pageBtn" aria-label="Próxima página">▶</button>
       </nav>
     </section>
+    <!-- divisor neon entre o carrossel e os cards -->
+
+
   </main>
+  
 
   <script src="app.js" defer></script>
 </body>

@@ -604,3 +604,36 @@ header {
   outline: 2px solid rgba(20,205,255,.7);
   outline-offset: 2px;
 }
+/* ❤️ botão de favorito no card */
+.p_fav{
+  position: absolute;
+  top: 8px;               /* canto superior esquerdo */
+  left: 10px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(14,19,32,.70);
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  z-index: 3;
+}
+.p_fav:hover{ transform: scale(1.04); }
+
+.p_fav svg{
+  width: 14px;
+  height: 14px;
+  fill: #9fb0c6;                 /* cor neutra */
+  pointer-events: none;
+}
+
+.p_fav.is-fav{
+  background: rgba(20,205,255,.14);
+  border-color: rgba(20,205,255,.45);
+}
+.p_fav.is-fav svg{
+  fill: var(--azul-botao);
+  filter: drop-shadow(0 0 6px rgba(20,205,255,.55));
+}
