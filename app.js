@@ -275,22 +275,31 @@ function pcLoadCarousel(type = 'all'){
       return d;
     }
     function applyTransforms() {
-      cards.forEach((card, i) => {
-        const d = relative(i);
-        const isCenter = d === 0;
-        const x = d * 260 + dragDX;
-        const scale = 1 - Math.min(Math.abs(d) * 0.12, 0.30);
-        const opacity = 1 - Math.min(Math.abs(d) * 0.25, 0.50);
-        const z = 100 - Math.abs(d);
+  const spread = 230;        // espaçamento base (ajuste fino aqui)
+  const edgeFactor = 0.85;   // quanto comprimir as pontas (0.8–0.9)
 
-        card.style.transform = `translate(-50%, -50%) translateX(${x}px) scale(${scale})`;
-        card.style.opacity = opacity;
-        card.style.zIndex = z;
-        card.classList.toggle("is-center", isCenter);
-        // sem blur por enquanto
-        card.style.filter = "none";
-      });
-    }
+  const maxD = Math.floor(cards.length / 2);
+
+  cards.forEach((card, i) => {
+    const d = relative(i);
+    const isCenter = d === 0;
+
+    // comprime só os extremos (ex.: d = -2 e d = 2 quando há 5 cards)
+    const factor = (Math.abs(d) === maxD) ? edgeFactor : 1;
+
+    const x = d * spread * factor + dragDX;
+    const scale = 1 - Math.min(Math.abs(d) * 0.12, 0.30);
+    const opacity = 1 - Math.min(Math.abs(d) * 0.25, 0.50);
+    const z = 100 - Math.abs(d);
+
+    card.style.transform = `translate(-50%, -50%) translateX(${x}px) scale(${scale})`;
+    card.style.opacity = opacity;
+    card.style.zIndex = z;
+    card.classList.toggle("is-center", isCenter);
+    card.style.filter = "none";
+  });
+}
+
     function go(dir){ index = mod(index + dir, len); applyTransforms(); }
     function goTo(i){ index = mod(i, len); applyTransforms(); }
 

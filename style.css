@@ -129,6 +129,27 @@ header {
   gap: clamp(8px, 2vw, 14px);
 }
 
+/* Macaco */
+.f_logo img{
+  width: 146px;
+  height: auto;
+  display: block;      /* evita “buraquinho” embaixo */
+  margin: 0 auto;      /* centraliza */
+    margin-top: -100px;
+}
+
+/* Letreiro Pokeprimata */
+.f_letreiro img{
+  width: 356px;        /* <- era 456x */
+  height: auto;
+  display: block;
+  margin:  0 auto;
+}
+.f_letreiro{
+    margin-top: -120px;
+}
+
+
 .hero-logos__monkey,
 .hero-logos__wordmark {
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .35));
@@ -416,15 +437,6 @@ header {
   padding: clamp(20px, 4vw, 36px) 16px 10px;
 }
 
-.hero__subtitle {
-  margin-top: 4px;
-  color: #d6e6ff;
-  opacity: .9;
-  line-height: 1.4;
-  font-size: clamp(14px, 2.1vw, 18px);
-  max-width: 900px;
-}
-
 .hero__search {
   margin-top: 10px;
   display: flex;
@@ -471,26 +483,90 @@ header {
 }
 
 .hero__search button:hover { background: var(--azul_contraste); }
- /* o wrap vira referência para posicionar a palavra por cima */
-.hero__wrap{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* === Barra de pesquisa menor (override) === */
+.hero__search {
+  width: min(720px, 88vw);
+  padding: 6px 8px 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.30);
 }
 
-/* ícone fica no fluxo normal (atrás) */
-.hero__icon{ display:block; }
-
-/* wordmark por cima, centralizado; ajuste o "grude" em --overlap */
-.hero__wordmark{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);     /* centraliza na horizontal */
-  bottom: var(--overlap, 222px);    /* NEGATIVO = invade mais o macaco */
-  z-index: 2;                       /* fica na frente */
+.hero__searchIcon {
+  width: 14px;
+  height: 14px;
 }
-.hero__wrap{ --overlap: -26px; }
-.hero__wordmark{ margin-left: 4px; }   /* direita */
-/* ou */ 
-.hero__wordmark{ margin-left: -4px; }  /* esquerda */
+
+.hero__search input {
+  font-size: 14px;
+}
+
+.hero__search button {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+/* === Nav maior (Inicio, Pokémon, Favoritos, etc.) === */
+.f_header_a{
+  font-size: 120%;          /* era 70% */
+  letter-spacing: .4px;
+}
+
+/* dá um respiro entre os itens */
+.f_header_nav{
+  gap: 1.2rem;             /* era 1rem */
+}
+
+/* em telas bem pequenas, ajusta pra não quebrar */
+@media (max-width: 420px){
+  .f_header_a{ font-size: 82%; }
+  .f_header_nav{ gap: .6rem; }
+}
+/* === Subir o carrossel e grudar na busca === */
+
+/* diminui o “respiro” embaixo da hero */
+.hero{
+  padding-bottom: 4px;  /* antes ~10px */
+}
+
+/* garante que o campo de busca não cria espaço extra */
+.hero__search{
+  margin-bottom: 0;
+}
+
+/* encosta o carrossel na hero */
+.pc-carousel{
+  margin: 8px auto 24px; /* antes: 40px auto 24px */
+}
+
+/* opcional: em telas muito pequenas, gruda ainda mais */
+@media (max-width: 480px){
+  .pc-carousel{
+    margin-top: 6px;
+  }
+}
+/* === Boxes do carrossel menores (override) === */
+.pc-card{
+  width: 220px;
+  height: 330px;
+}
+
+.pc-card img{
+  height: 136px;
+}
+
+.pc-viewport{
+  height: 360px;
+}
+
+/* opcional: título um tiquinho menor */
+.pc-name{
+  font-size: 20px;
+}
+/* === Botões do carrossel mais perto (override) === */
+.pc-prev{
+  left: -32px;   /* antes -64px */
+}
+.pc-next{
+  right: -32px;  /* antes -64px */
+}
+
